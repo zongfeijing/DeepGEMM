@@ -8,8 +8,15 @@
 
 namespace deep_gemm {
 
+// Custom hasher for std::filesystem::path that works regardless of standard library support
+struct filesystem_path_hash {
+    std::size_t operator()(const std::filesystem::path& p) const noexcept {
+        return std::filesystem::hash_value(p);
+    }
+};
+
 class KernelRuntimeCache {
-    std::unordered_map<std::filesystem::path, std::shared_ptr<KernelRuntime>> cache;
+    std::unordered_map<std::filesystem::path, std::shared_ptr<KernelRuntime>, filesystem_path_hash> cache;
 
 public:
     // TODO: consider cache capacity

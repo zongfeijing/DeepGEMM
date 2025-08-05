@@ -11,6 +11,7 @@ cxx_flags = ['-std=c++20', '-O3', '-fPIC', '-Wno-psabi']
 sources = ['csrc/python_api.cpp']
 build_include_dirs = [
     f'{CUDA_HOME}/include',
+    f'{CUDA_HOME}/include/cccl',
     'deep_gemm/include',
     'third-party/cutlass/include',
     'third-party/fmt/include',
